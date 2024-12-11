@@ -20,6 +20,9 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.location.Location;
 
+import com.facebook.react.common.build.ReactBuildConfig;
+import com.facebook.react.uimanager.common.UIManagerType;
+import com.facebook.react.uimanager.UIManagerHelper;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableArray;
@@ -178,7 +181,14 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
       }
     });
 
-    eventDispatcher = reactContext.getNativeModule(UIManagerModule.class).getEventDispatcher();
+    int uiManagerType = UIManagerType.DEFAULT;
+    if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
+      uiManagerType = UIManagerType.FABRIC;
+    }
+
+    eventDispatcher = UIManagerHelper
+      .getUIManager(reactContext, uiManagerType)
+      .getEventDispatcher();
 
     // Set up a parent view for triggering visibility in subviews that depend on it.
     // Mainly ReactImageView depends on Fresco which depends on onVisibilityChanged() event

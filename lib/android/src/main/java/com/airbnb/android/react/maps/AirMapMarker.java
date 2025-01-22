@@ -260,12 +260,14 @@ public class AirMapMarker extends AirMapFeature {
     } else {
       ViewChangesTracker.getInstance().removeMarker(this);
 
-      // Let it render one more time to avoid race conditions.
-      // i.e. Image onLoad ->
-      //      ViewChangesTracker may not get a chance to render ->
-      //      setState({ tracksViewChanges: false }) ->
-      //      image loaded but not rendered.
-      updateMarkerIcon();
+      if (!BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
+        // Let it render one more time to avoid race conditions.
+        // i.e. Image onLoad ->
+        //      ViewChangesTracker may not get a chance to render ->
+        //      setState({ tracksViewChanges: false }) ->
+        //      image loaded but not rendered.
+        updateMarkerIcon();
+      }
     }
   }
 

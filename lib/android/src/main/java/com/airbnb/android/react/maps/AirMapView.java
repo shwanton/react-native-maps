@@ -20,7 +20,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.location.Location;
 
-import com.facebook.react.common.build.ReactBuildConfig;
 import com.facebook.react.uimanager.common.UIManagerType;
 import com.facebook.react.uimanager.UIManagerHelper;
 import com.facebook.react.bridge.LifecycleEventListener;

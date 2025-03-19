@@ -55,7 +55,10 @@ RCT_EXPORT_MODULE()
 
 RCT_EXPORT_VIEW_PROPERTY(initialCamera, GMSCameraPosition)
 RCT_REMAP_VIEW_PROPERTY(camera, cameraProp, GMSCameraPosition)
-RCT_EXPORT_VIEW_PROPERTY(initialRegion, MKCoordinateRegion)
+RCT_CUSTOM_VIEW_PROPERTY(initialRegion, MKCoordinateRegion, AIRGoogleMap) {
+  if (json == nil) return;
+  [view setInitialRegion:[RCTConvert MKCoordinateRegion:json]];
+}
 RCT_EXPORT_VIEW_PROPERTY(region, MKCoordinateRegion)
 RCT_EXPORT_VIEW_PROPERTY(showsBuildings, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(showsCompass, BOOL)
